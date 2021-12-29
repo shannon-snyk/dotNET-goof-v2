@@ -15,3 +15,13 @@ steps:
     git clone https://github.com/snyk-tech-services/snyk-filter.git
     npm install -g snyk-filter
   displayName: 'Install Utilities'
+
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce'
+
+- script: |
+    docker build . -t goof-docker-snyk --target=snyk
+  displayName: 'Build Scanning Container'
+
+  
