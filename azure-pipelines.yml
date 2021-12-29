@@ -35,6 +35,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/snyk_results.html'
+    PathtoPublish: './snyk_results.html'
     ArtifactName: 'snyk_results.html'
     publishLocation: 'Container'
