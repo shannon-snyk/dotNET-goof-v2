@@ -26,6 +26,7 @@ steps:
 
 - script: |
     docker run -e SNYK_TOKEN=$(SNYK_TOKEN) goof-docker-snyk > output.json
+  continueOnError: true
   displayName: 'Scan within container'
 
 - script: |
