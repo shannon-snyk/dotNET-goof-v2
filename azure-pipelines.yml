@@ -24,12 +24,9 @@ steps:
     docker build . -t goof-docker-snyk --target=snyk
   displayName: 'Build Scanning Container'
 
-- task: Docker@2
-  inputs:
-    command: 'start'
-    arguments: '-e SNYK_TOKEN=${SNYK_TOKEN}'
-    container: 'goof-docker-snyk'
-  displayName: 'Scan within container & Normalize Output'
+- script: |
+    docker run -e SNYK_TOKEN=$(SNYK_TOKEN) goof-docker-snyk > output.json
+  displayName: 'Scan within container'
 
 - script: |
     cat output.json | snyk-to-html > snyk_results.html
