@@ -26,7 +26,7 @@ steps:
 
 - script: |
     docker run -e SNYK_TOKEN=${SNYK_TOKEN} goof-docker-snyk > pre_output.json
-    tail -n +2 pre_output.json > output.json && sed -i '.bak' '1s/^/{\'$'\n/g' output.json && rm pre_output.json
+    tail -n +2 pre_output.json > output.json && gsed -i '.bak' '1s/^/{\'$'\n/g' output.json && rm pre_output.json
   displayName: 'Scan within container & Normalize Output'
 
 - script: |
