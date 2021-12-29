@@ -24,4 +24,17 @@ steps:
     docker build . -t goof-docker-snyk --target=snyk
   displayName: 'Build Scanning Container'
 
-  
+- script: |
+    docker run -e SNYK_TOKEN=${SNYK_TOKEN} goof-docker-snyk > pre_output.json
+    tail -n +2 pre_output.json > output.json && sed -i '.bak' '1s/^/{\'$'\n/g' output.json && rm pre_output.json
+  displayName: 'Scan within container & Normalize Output'
+
+- script: |
+    cat output.json | snyk-to-html > snyk_results.html
+  displayName: 'Generate Snyk HTML Report'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/snyk_results.html'
+    ArtifactName: 'snyk_results.html'
+    publishLocation: 'Container'
