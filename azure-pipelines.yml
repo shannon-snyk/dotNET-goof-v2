@@ -38,3 +38,8 @@ steps:
     PathtoPublish: './snyk_results.html'
     ArtifactName: 'snyk_results.html'
     publishLocation: 'Container'
+
+- script: |
+    docker build . -t dotnet_goof
+  continueOnError: true
+  displayName: 'Build Container'

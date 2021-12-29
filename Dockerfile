@@ -1,6 +1,3 @@
-# docker build -t appsecco/owasp-webgoat-dot-net .
-# docker run --name webgoat -it -p 9000:9000 -d appsecco/owasp-webgoat-dot-net
-
 #Stage One
 FROM mcr.microsoft.com/dotnet/sdk:5.0 as builder
 
@@ -18,6 +15,12 @@ COPY --from=builder /goof /goof
 CMD ["snyk", "test --file=/goof/dotNETGoofV2.sln --json"]
 
 #Stage Three - App
-FROM ubuntu
+FROM mcr.microsoft.com/dotnet/sdk:5.0
 
-EXPOSE 9000
+COPY --from=builder /goof /goof
+
+WORKDIR /goof/dotNETGoofV2.Website
+EXPOSE 5001
+EXPOSE 5000
+RUN dotnet dev-certs https
+ENTRYPOINT [ "dotnet", "watch", "run", "--urls", "https://0.0.0.0:5000"]
