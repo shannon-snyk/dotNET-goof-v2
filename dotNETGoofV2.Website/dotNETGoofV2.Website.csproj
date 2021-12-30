@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.2" />
     <PackageReference Include="Microsoft.Owin" Version="3.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="4.5.1" />
-    <PackageReference Include="TinyMCE" Version="4.8.2" />
+    <PackageReference Include="TinyMCE" Version="5.10.0" />
     <PackageReference Include="Wire" Version="1.0.0" />
   </ItemGroup>
 </Project>
