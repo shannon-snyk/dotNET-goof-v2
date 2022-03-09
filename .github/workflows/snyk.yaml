@@ -22,9 +22,7 @@ jobs:
 
     - name: Build project
       run: |
-        dotnet restore ${{ inputs.projectPath }}/${{ inputs.projectName }}
-        cd ${{ inputs.projectPath }}
-        dotnet build --no-restore
+        dotnet restore 
     - name: Run Synk Code and Dependency Scan
       uses: snyk/actions/dotnet@master
       continue-on-error: true # To make sure that SARIF upload gets called
