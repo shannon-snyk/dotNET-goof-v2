@@ -6522,19 +6522,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/mattbrown/.nuget/packages/": {}
+    "/Users/mike/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mattbrown/Desktop/SME_Work/dotNETGoofV2/dotNETGoofV2.Website/dotNETGoofV2.Website.csproj",
+      "projectUniqueName": "/Users/mike/Projects/dotNET-goof-v2/dotNETGoofV2.Website/dotNETGoofV2.Website.csproj",
       "projectName": "dotNETGoofV2.Website",
-      "projectPath": "/Users/mattbrown/Desktop/SME_Work/dotNETGoofV2/dotNETGoofV2.Website/dotNETGoofV2.Website.csproj",
-      "packagesPath": "/Users/mattbrown/.nuget/packages/",
-      "outputPath": "/Users/mattbrown/Desktop/SME_Work/dotNETGoofV2/dotNETGoofV2.Website/obj/",
+      "projectPath": "/Users/mike/Projects/dotNET-goof-v2/dotNETGoofV2.Website/dotNETGoofV2.Website.csproj",
+      "packagesPath": "/Users/mike/.nuget/packages/",
+      "outputPath": "/Users/mike/Projects/dotNET-goof-v2/dotNETGoofV2.Website/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mattbrown/.nuget/NuGet/NuGet.Config"
+        "/Users/mike/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -6609,7 +6609,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.302/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.404/RuntimeIdentifierGraph.json"
       }
     }
   },
