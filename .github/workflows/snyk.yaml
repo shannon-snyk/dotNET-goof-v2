@@ -1,0 +1,39 @@
+name: DevSecOps CI
+
+on:
+  push:
+    branches:
+    - main
+
+env:
+  DOTNET_VERSION: 6.0.x
+
+jobs:
+  code-dep-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Build project
+      run: |
+        dotnet restore ${{ inputs.projectPath }}/${{ inputs.projectName }}
+        cd ${{ inputs.projectPath }}
+        dotnet build --no-restore
+    - name: Run Synk Code and Dependency Scan
+      uses: snyk/actions/dotnet@master
+      continue-on-error: true # To make sure that SARIF upload gets called
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --sarif-file-output=snyk.sarif --file=./dotNETGoofV2.sln --severity-threshold=low
+
+    - name: Upload result to GitHub Code Scanning Alerts
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: snyk.sarif
