@@ -7,6 +7,7 @@ on:
 
 env:
   DOTNET_VERSION: 6.0.x
+  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 jobs:
   code-dep-scan:
@@ -23,15 +24,20 @@ jobs:
     - name: Build project
       run: |
         dotnet restore 
-    - name: Run Synk Code and Dependency Scan
-      uses: snyk/actions/dotnet@master
-      continue-on-error: true # To make sure that SARIF upload gets called
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        args: --sarif-file-output=snyk.sarif --file=./dotNETGoofV2.sln --severity-threshold=low
+    - name: Install and Run Snyk
+      run: |
+        npm i -g snyk
+        snyk test --file=./dotNETGoofV2.sln
 
-    - name: Upload result to GitHub Code Scanning Alerts
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: snyk.sarif
+#    - name: Run Synk Code and Dependency Scan
+#      uses: snyk/actions/dotnet@master
+ #     continue-on-error: true # To make sure that SARIF upload gets called
+  #    env:
+   #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    #  with:
+     #   args: --sarif-file-output=snyk.sarif --file=./dotNETGoofV2.sln --severity-threshold=low
+
+#    - name: Upload result to GitHub Code Scanning Alerts
+ #     uses: github/codeql-action/upload-sarif@v1
+  #    with:
+   #     sarif_file: snyk.sarif
